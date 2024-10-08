@@ -1,4 +1,5 @@
-var shouldShuffle = false;
+let shouldShuffle = false;
+
 function shuffleWord(word, percentage) {
   const wordLen = word.length;
   const numLettersToShuffle = Math.max(
@@ -11,8 +12,7 @@ function shuffleWord(word, percentage) {
   }
 
   const start = wordLen > 2 ? 1 : 0;
-  const middlePart =
-    wordLen > 2 ? word.slice(start, -1).split("") : word.slice(start).split("");
+  const middlePart = word.slice(start, -1).split("");
 
   // Shuffle the middle part
   for (let i = middlePart.length - 1; i > 0; i--) {
@@ -20,16 +20,13 @@ function shuffleWord(word, percentage) {
     [middlePart[i], middlePart[j]] = [middlePart[j], middlePart[i]];
   }
 
-  let shuffledWord;
-  if (wordLen > 2) {
-    shuffledWord =
-      word[0] +
-      middlePart.slice(0, numLettersToShuffle).join("") +
-      middlePart.slice(numLettersToShuffle).join("") +
-      word[wordLen - 1];
-  } else {
-    shuffledWord = word[0] + middlePart.join("");
-  }
+  const shuffledWord =
+    wordLen > 2
+      ? word[0] +
+        middlePart.slice(0, numLettersToShuffle).join("") +
+        middlePart.slice(numLettersToShuffle).join("") +
+        word[wordLen - 1]
+      : word[0] + middlePart.join("");
 
   return shuffledWord;
 }
@@ -37,13 +34,20 @@ function shuffleWord(word, percentage) {
 async function onStart() {
   shouldShuffle = true;
   while (shouldShuffle) {
-    var word = document.getElementById("textToShuffle").value;
-    var percentage = document.getElementById("percentage").value;
-    var words = word.split(" ");
-    var shuffledWords = [];
-    words.forEach((word) => {
-      shuffledWords.push(shuffleWord(word, percentage));
-    });
+    const word = document.getElementById("textToShuffle").value;
+    const percentage = parseInt(
+      document.getElementById("percentage").value,
+      10
+    );
+
+    if (isNaN(percentage) || percentage < 0 || percentage > 100) {
+      console.error("Invalid percentage value");
+      return;
+    }
+
+    const words = word.split(" ");
+    const shuffledWords = words.map((word) => shuffleWord(word, percentage));
+
     console.log(shuffledWords);
     document.getElementById("shuffledText").innerHTML = shuffledWords.join(" ");
     await sleep(600);
