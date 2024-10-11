@@ -1,5 +1,15 @@
 let shouldShuffle = false;
 
+window.onload = function load() {
+  const speedSlider = document.getElementById("speedValue");
+  speedSlider.addEventListener("input", function () {
+    document.getElementById("speedLabel").innerHTML =
+      "Speed = " + speedSlider.value + "ms";
+  });
+  speedSlider.value = 200;
+  speedSlider.dispatchEvent(new Event("input"));
+};
+
 function shuffleWord(word, percentage) {
   const wordLen = word.length;
   const numLettersToShuffle = Math.max(
@@ -48,9 +58,10 @@ async function onStart() {
     const words = word.split(" ");
     const shuffledWords = words.map((word) => shuffleWord(word, percentage));
 
-    console.log(shuffledWords);
     document.getElementById("shuffledText").innerHTML = shuffledWords.join(" ");
-    await sleep(600);
+    const speedSlider = document.getElementById("speedValue");
+    var speed = speedSlider.value;
+    await sleep(speed);
   }
 }
 

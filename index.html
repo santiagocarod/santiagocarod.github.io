@@ -1,65 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <script src="script.js"></script>
-    <link rel="stylesheet" href="style.css" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dislexia Sim</title>
-  </head>
-  <body>
-    <div class="position-relative start-50">
-      <p class="fs-1">Dislexia Simulator</p>
-    </div>
-    <div class="container">
-      <div class="row align-items-start">
-        <div class="col">
-          <div class="form-floating">
-            <textarea
-              class="form-control"
-              placeholder="Leave a comment here"
-              id="textToShuffle"
-              style="height: 300px"
-            ></textarea>
-            <label for="floatingTextarea">Text</label>
-          </div>
-          <br />
-          <input
-            id="percentage"
-            class="form-control"
-            type="number"
-            aria-label="Porcentage"
-            value="70"
-          />
-          <br />
 
-          <div class="col-auto">
-            <button
-              onclick="onStart()"
-              type="submit"
-              class="btn btn-primary mb-3"
-            >
-              Start
-            </button>
-            <button
-              onclick="onStop()"
-              type="submit"
-              class="btn btn-secondary mb-3"
-            >
-              Stop
-            </button>
-          </div>
+<head>
+  <script src="script.js"></script>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dislexia Sim</title>
+</head>
+
+<body>
+  <p class="fs-1 text-center">Dislexia Simulator</p>
+  <div class="container">
+    <div class="row align-items-start">
+      <div class="col">
+        <div class="form-floating">
+          <textarea class="form-control" id="textToShuffle" style="height: 300px" onchange="onStart()"></textarea>
         </div>
-        <div class="col">
-          <p id="shuffledText" class="text-break text-justify"></p>
-        </div>
+        <br />
+        <label for="percentage">Percentage of change</label>
+        <input id="percentage" class="form-control" type="number" aria-label="Porcentage" value="70"
+          onchange="onStart()" />
+        <br />
+        <label id="speedLabel" for="customRange1" class="form-label">Speed</label>
+        <input id="speedValue" type="range" class="form-range" id="customRange1" onchange="onStart()" min="200" max="1500" step="100">
+        <br />
+      </div>
+      <div class="col">
+        <p id="shuffledText" class="text-break text-justify"></p>
       </div>
     </div>
-  </body>
+  </div>
+  </div>
+</body>
+
 </html>
