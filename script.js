@@ -10,6 +10,12 @@ window.onload = function load() {
     speedSlider.value = 200;
     speedSlider.dispatchEvent(new Event("input"));
   }
+  //read sample_text.txt and set it to textToShuffle
+  fetch("sample_text.txt")
+    .then((response) => response.text())
+    .then((data) => {
+      document.getElementById("textToShuffle").value = data;
+    });
   onStart();
 };
 
